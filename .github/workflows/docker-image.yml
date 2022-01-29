@@ -1,12 +1,9 @@
 name: Create docker image
 
 on:
+  repository_dispatch:
+    types: [start-build]
   workflow_dispatch:
-    inputs: 
-      branch:
-        description: "Branch to pull"
-        required: true
-        default: "main"
  
 jobs:
   buildx:
@@ -36,7 +33,7 @@ jobs:
         id: modify
         name: Modify scripts and get version
         run: |
-          output=$(./build.sh ${{github.event.inputs.branch}})
+          output=$(./build.sh main)
           output="${output:13}"
           echo ::set-output name=date_version::$output
       -
