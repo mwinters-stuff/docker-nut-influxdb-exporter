@@ -1,0 +1,68 @@
+#
+# IMPORTANT NOTE
+#
+# This chart inherits from our common library chart. You can check the default values/options here:
+# https://github.com/k8s-at-home/library-charts/tree/main/charts/stable/common/values.yaml
+#
+
+image:
+  # -- image repository
+  repository: ghcr.io/mwinters-stuff/docker-nut-influxdb-exporter
+  # -- image tag
+  tag: "latest"
+  # -- image pull policy
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: 
+  - name: -pull-secret
+imageCredentials:
+  registry: ghcr.io
+  username: mwinters-stuff
+  password: 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
+  email: mathew@winters.org.nz
+
+nameOverride: "nut-influxdb-exporter"
+fullnameOverride: "nut-influxdb-exporter"
+
+
+# @default -- See below
+env:
+  # -- Set the container timezone
+  TZ: Pacific/Auckland
+  # -- Set the container user id
+  PUID: "1000"
+  # -- Set the container group id
+  PGID: "1000"
+
+  INFLUX_ORG: "org"
+  INFLUX_BUCKET: "bucket"
+  INFLUX_TOKEN: "token"
+  INFLUX_URL: "url"
+
+  NUT_HOST: "nut"
+  NUT_PORT: "nut"
+  NUT_USERNAME: "nut"
+  NUT_PASSWORD: "nut"
+  UPS_NAME: "ups"
+  INTERVAL: 60
+  WATTS: 100
+  VERBOSE: false
+
+
+#-- Configures service settings for the chart.
+# @default -- See values.yaml
+service:
+  main:
+    enabled: false
+
+ingress:
+  # -- Enable and configure ingress settings for the chart under this key.
+  # @default -- See values.yaml
+  main:
+    enabled: false
+
+# -- Configure persistence settings for the chart under this key.
+# @default -- See values.yaml
+persistence:
+  config:
+    enabled: false
