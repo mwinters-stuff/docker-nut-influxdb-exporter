@@ -47,6 +47,10 @@ jobs:
     - name: version-print
       run: echo "Version ${{steps.version.outputs.new_version}}"
     
+    - id: modify
+      name: Modify scripts and get version
+      run: ./build.sh main
+
     - name: Build and push
       uses: docker/build-push-action@v2
       with:
