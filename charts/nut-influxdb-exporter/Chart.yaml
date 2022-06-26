@@ -7,9 +7,9 @@ version: 0.0.1
 kubeVersion: ">=1.16.0-0"
 keywords:
   - nut-influxdb-exporter
-home: https://github.com/mwinters-stuff/nut-influxdb-exporter
+home: https://github.com/mwinters-stuff/docker-nut-influxdb-exporter
 sources:
-  - https://github.com/mwinters-stuff/nut-influxdb-exporter
+  - https://github.com/mwinters-stuff/docker-nut-influxdb-exporter
 maintainers:
   - name: mwinters
     email: mathew@winters.nz
