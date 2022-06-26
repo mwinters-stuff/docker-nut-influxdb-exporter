@@ -2,11 +2,11 @@
 apiVersion: v2
 appVersion: 0.0.1
 description: An nut information exporter to influxdb 2 runner
-name: periodic-scripts
+name: nut-influxdb-exporter
 version: 0.0.1
 kubeVersion: ">=1.16.0-0"
 keywords:
-  - periodic-scripts
+  - nut-influxdb-exporter
 home: https://github.com/mwinters-stuff/nut-influxdb-exporter
 sources:
   - https://github.com/mwinters-stuff/nut-influxdb-exporter
