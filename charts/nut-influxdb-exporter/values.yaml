@@ -7,7 +7,7 @@
 
 image:
   # -- image repository
-  repository: ghcr.io/mwinters-stuff/docker-nut-influxdb-exporter
+  repository: ghcr.io/mwinters-stuff/nut-influxdb-exporter
   # -- image tag
   tag: "latest"
   # -- image pull policy
