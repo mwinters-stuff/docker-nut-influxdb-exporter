@@ -14,7 +14,7 @@ image:
   pullPolicy: IfNotPresent
 
 imagePullSecrets: 
-  - name: -pull-secret
+  - name: nut-influxdb-exporter-pull-secret
 imageCredentials:
   registry: ghcr.io
   username: mwinters-stuff
