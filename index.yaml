@@ -3,7 +3,7 @@ entries:
   nut-influxdb-exporter:
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2022-06-26T03:29:21.566721177Z"
+    created: "2022-06-26T03:34:55.94392887Z"
     dependencies:
     - name: common
       repository: https://library-charts.k8s-at-home.com
@@ -25,7 +25,7 @@ entries:
     version: 0.0.2-ec122a7
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2022-06-26T03:29:21.563589175Z"
+    created: "2022-06-26T03:34:55.940093624Z"
     dependencies:
     - name: common
       repository: https://library-charts.k8s-at-home.com
@@ -47,7 +47,7 @@ entries:
     version: 0.0.2-767c962
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2022-06-26T03:29:21.560740764Z"
+    created: "2022-06-26T03:34:55.93627868Z"
     dependencies:
     - name: common
       repository: https://library-charts.k8s-at-home.com
@@ -67,4 +67,26 @@ entries:
     urls:
     - nut-influxdb-exporter-0.0.2-32bb47a.tgz
     version: 0.0.2-32bb47a
-generated: "2022-06-26T03:29:21.557394369Z"
+  - apiVersion: v2
+    appVersion: 0.0.1
+    created: "2022-06-26T03:34:55.932974882Z"
+    dependencies:
+    - name: common
+      repository: https://library-charts.k8s-at-home.com
+      version: 4.4.2
+    description: An nut information exporter to influxdb 2 runner
+    digest: d22c412cb26c349bc0bbf483d34d666669a74e7bcaa0d4c791cae4606ce2cb66
+    home: https://github.com/mwinters-stuff/docker-nut-influxdb-exporter
+    keywords:
+    - nut-influxdb-exporter
+    kubeVersion: '>=1.16.0-0'
+    maintainers:
+    - email: mathew@winters.nz
+      name: mwinters
+    name: nut-influxdb-exporter
+    sources:
+    - https://github.com/mwinters-stuff/docker-nut-influxdb-exporter
+    urls:
+    - nut-influxdb-exporter-0.0.2-2bd3c41.tgz
+    version: 0.0.2-2bd3c41
+generated: "2022-06-26T03:34:55.923900964Z"
