@@ -7,20 +7,20 @@
 
 image:
   # -- image repository
-  repository: ghcr.io/mwinters-stuff/nut-influxdb-exporter
+  repository: harbor.local.winters.nz/library/periodic-scripts
   # -- image tag
   tag: "latest"
   # -- image pull policy
   pullPolicy: IfNotPresent
 
 imagePullSecrets: 
-  - name: nut-influxdb-exporter-pull-secret
+  - name: periodic-scripts-pull-secret
 imageCredentials:
-  registry: ghcr.io
-  username: mwinters-stuff
-  password: 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
-  email: mathew@winters.org.nz
-
+  registry: harbor.local.winters.nz
+  username: robot$github
+  password: OFKlOP9HKJrCknf18tgHwGwBfw4nq6GG
+  email: mathew@winters.nz
+  
 nameOverride: "nut-influxdb-exporter"
 fullnameOverride: "nut-influxdb-exporter"
 
