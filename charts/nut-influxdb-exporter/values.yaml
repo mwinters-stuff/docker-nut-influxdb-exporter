@@ -7,14 +7,14 @@
 
 image:
   # -- image repository
-  repository: harbor.local.winters.nz/library/periodic-scripts
+  repository: harbor.local.winters.nz/library/nut-influxdb-exporter
   # -- image tag
   tag: "latest"
   # -- image pull policy
   pullPolicy: IfNotPresent
 
 imagePullSecrets: 
-  - name: periodic-scripts-pull-secret
+  - name: nut-influxdb-exporter-pull-secret
 imageCredentials:
   registry: harbor.local.winters.nz
   username: robot$github
