@@ -55,7 +55,9 @@ jobs:
     - name: Chart version
       uses: mikefarah/yq@master
       with:
-        cmd: yq -i '.version = "${{steps.version.outputs.new_version}}" | .appVersion = "${{steps.version.outputs.new_version}}"' 'charts/nut-influxdb-exporter/Chart.yaml'
+        cmd: |
+          yq -i '.version = "${{steps.version.outputs.new_version}}" | .appVersion = "${{steps.version.outputs.new_version}}"' 'charts/nut-influxdb-exporter/Chart.yaml'
+          yq -i '.image.tag = "${{steps.version.outputs.new_version}}"' 'charts/nut-influxdb-exporter/values.yaml'
 
     - name: Get helm dependancies
       run: |
