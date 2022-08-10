@@ -7,7 +7,7 @@
 
 image:
   # -- image repository
-  repository: harbor.local.winters.nz/library/nut-influxdb-exporter
+  repository: harbor.winters.org.nz/library/nut-influxdb-exporter
   # -- image tag
   tag: "latest"
   # -- image pull policy
@@ -16,7 +16,7 @@ image:
 imagePullSecrets: 
   - name: nut-influxdb-exporter-pull-secret
 imageCredentials:
-  registry: harbor.local.winters.nz
+  registry: harbor.winters.org.nz
   username: robot$github
   password: OFKlOP9HKJrCknf18tgHwGwBfw4nq6GG
   email: mathew@winters.nz
