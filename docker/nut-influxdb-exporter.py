@@ -80,47 +80,38 @@ def main_loop():
     # Main infinite loop: Get the data from NUT every interval and send it to InfluxDB.
     while True:
         print("Connecting to InfluxDB url:{}".format(INFLUX_URL))
-        iclient = influxdb_client.InfluxDBClient(
-            url=INFLUX_URL,
-            token=INFLUX_TOKEN,
-            org=INFLUX_ORG
-        )
-
-        if iclient:
-            print("Connected successfully to InfluxDB")
-
-        write_api = iclient.write_api(write_options=SYNCHRONOUS)
-
         try:
-            print("Connecting to NUT host {}:{}".format(NUT_HOST, NUT_PORT))
-            ups_client = PyNUTClient(
-                host=NUT_HOST, port=NUT_PORT, login=NUT_USERNAME, password=NUT_PASSWORD, debug=VERBOSE)
-            if ups_client:
-                print("Connected successfully to NUT")
+            iclient = influxdb_client.InfluxDBClient(
+                url=INFLUX_URL,
+                token=INFLUX_TOKEN,
+                org=INFLUX_ORG
+            )
 
-            ups_data = ups_client.list_vars(UPS_NAME)
+            if iclient:
+                # print("Connected successfully to InfluxDB")
+
+                write_api = iclient.write_api(write_options=SYNCHRONOUS)
+
+                # print("Connecting to NUT host {}:{}".format(NUT_HOST, NUT_PORT))
+                ups_client = PyNUTClient(host=NUT_HOST, port=NUT_PORT, login=NUT_USERNAME, password=NUT_PASSWORD, debug=VERBOSE)
+                if ups_client:
+                    # print("Connected successfully to NUT")
+
+                    ups_data = ups_client.list_vars(UPS_NAME)
+
+                    json_body = construct_object(ups_data, REMOVE_KEYS, TAG_KEYS)
+
+                    # print(json_body)
+                    write_api.write(bucket=INFLUX_BUCKET, org=INFLUX_ORG, record=json_body)
+                    ups_client = None
+                iclient.close()
+                iclient = None
         except:
             tb = traceback.format_exc()
-            if VERBOSE:
-                print(tb)
-            print("Error getting data from NUT")
+            print(tb)
+            print("Error.")
             exit(1)
 
-        json_body = construct_object(ups_data, REMOVE_KEYS, TAG_KEYS)
-
-        try:
-            print(json_body)
-            write_api.write(bucket=INFLUX_BUCKET,
-                            org=INFLUX_ORG, record=json_body)
-        except:
-            tb = traceback.format_exc()
-            if VERBOSE:
-                print(tb)
-            print("Error connecting to InfluxDB.")
-            exit(2)
-
-        ups_client = None
-        iclient.close()
 
         time.sleep(INTERVAL)
 
