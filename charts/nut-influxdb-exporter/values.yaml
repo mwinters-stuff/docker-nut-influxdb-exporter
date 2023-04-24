@@ -17,9 +17,9 @@ imagePullSecrets:
   - name: nut-influxdb-exporter-pull-secret
 imageCredentials:
   registry: harbor.winters.org.nz
-  username: robot$github
-  password: OFKlOP9HKJrCknf18tgHwGwBfw4nq6GG
-  email: mathew@winters.nz
+  username: ""
+  password: ""
+  email: ""
   
 nameOverride: "nut-influxdb-exporter"
 fullnameOverride: "nut-influxdb-exporter"
