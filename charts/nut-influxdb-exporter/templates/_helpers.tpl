@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "influx-mqtt-sensors.name" -}}
+{{- define "nut-influxdb-exporter.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -10,7 +10,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "influx-mqtt-sensors.fullname" -}}
+{{- define "nut-influxdb-exporter.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -26,16 +26,16 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "influx-mqtt-sensors.chart" -}}
+{{- define "nut-influxdb-exporter.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "influx-mqtt-sensors.labels" -}}
-helm.sh/chart: {{ include "influx-mqtt-sensors.chart" . }}
-{{ include "influx-mqtt-sensors.selectorLabels" . }}
+{{- define "nut-influxdb-exporter.labels" -}}
+helm.sh/chart: {{ include "nut-influxdb-exporter.chart" . }}
+{{ include "nut-influxdb-exporter.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -45,37 +45,31 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "influx-mqtt-sensors.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "influx-mqtt-sensors.name" . }}
+{{- define "nut-influxdb-exporter.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "nut-influxdb-exporter.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "influx-mqtt-sensors.serviceAccountName" -}}
+{{- define "nut-influxdb-exporter.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "influx-mqtt-sensors.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "nut-influxdb-exporter.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
-{{- end }}
-{{- end }}
-
-{{- define "imagePullSecret" }}
-{{- with .Values.imageCredentials }}
-{{- printf "{\"auths\":{\"%s\":{\"username\":\"%s\",\"password\":\"%s\",\"email\":\"%s\",\"auth\":\"%s\"}}}" .registry .username .password .email (printf "%s:%s" .username .password | b64enc) | b64enc }}
 {{- end }}
 {{- end }}
 
 {{/*
 Environment Variables
 */}}
-{{- define "influx-mqtt-sensors.list-env-variables"}}
+{{- define "nut-influxdb-exporter.list-env-variables"}}
 {{- range $key, $val := .Values.env.secret }}
 - name: {{ $key }}
   valueFrom:
     secretKeyRef:
-      name: influx-mqtt-sensors-env-var-secret
+      name: nut-influxdb-exporter-env-var-secret
       key: {{ $key }}
 {{- end}}
 {{- range $key, $val := .Values.env.normal }}
