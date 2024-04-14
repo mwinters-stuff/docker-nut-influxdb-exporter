@@ -7,62 +7,69 @@
 
 image:
   # -- image repository
-  repository: harbor.winters.org.nz/library/nut-influxdb-exporter
+  repository: ghcr.io/mwinters-stuff/nut-influxdb-exporter
   # -- image tag
   tag: "latest"
   # -- image pull policy
   pullPolicy: IfNotPresent
 
-imagePullSecrets: 
-  - name: nut-influxdb-exporter-pull-secret
-imageCredentials:
-  registry: harbor.winters.org.nz
-  username: ""
-  password: ""
-  email: ""
-  
 nameOverride: "nut-influxdb-exporter"
 fullnameOverride: "nut-influxdb-exporter"
 
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: "influx-mqtt-sensors"
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
 
 # @default -- See below
 env:
-  # -- Set the container timezone
-  TZ: Pacific/Auckland
-  # -- Set the container user id
-  PUID: "1000"
-  # -- Set the container group id
-  PGID: "1000"
+  normal:
+    # -- Set the container timezone
+    TZ: Pacific/Auckland
+    # -- Set the container user id
+    PUID: "1000"
+    # -- Set the container group id
+    PGID: "1000"
 
-  INFLUX_ORG: "org"
-  INFLUX_BUCKET: "bucket"
-  INFLUX_TOKEN: "token"
-  INFLUX_URL: "url"
+    INFLUX_ORG: "org"
+    INFLUX_BUCKET: "bucket"
 
-  NUT_HOST: "nut"
-  NUT_PORT: "nut"
-  NUT_USERNAME: "nut"
-  NUT_PASSWORD: "nut"
-  UPS_NAME: "ups"
-  INTERVAL: 60
-  WATTS: 100
-  VERBOSE: false
+    NUT_HOST: "nut"
+    NUT_PORT: "nut"
 
+    UPS_NAME: "ups"
+    INTERVAL: 60
+    WATTS: 100
+    VERBOSE: false
 
-#-- Configures service settings for the chart.
-# @default -- See values.yaml
-service:
-  main:
-    enabled: false
+  secret:
+    INFLUX_TOKEN: "token"
+    INFLUX_URL: "url"
 
-ingress:
-  # -- Enable and configure ingress settings for the chart under this key.
-  # @default -- See values.yaml
-  main:
-    enabled: false
+    NUT_USERNAME: "nut"
+    NUT_PASSWORD: "nut"
 
-# -- Configure persistence settings for the chart under this key.
-# @default -- See values.yaml
-persistence:
-  config:
-    enabled: false
+resources: 
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+

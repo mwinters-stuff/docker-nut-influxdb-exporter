@@ -13,7 +13,3 @@ sources:
 maintainers:
   - name: mwinters
     email: mathew@winters.nz
-dependencies:
-  - name: common
-    repository: oci://harbor.winters.org.nz/k8s-at-winters
-    version: 0.1.5
